@@ -17,7 +17,7 @@ var pool = mysql.createPool({
     host: 'seungmoomysql.ctxaja8hdied.ap-northeast-2.rds.amazonaws.com',
     user: 'dltmdan92',
     password: '1568919am!',
-    database: '디비 생성해야됌',
+    database: 'ldcc12punch',
     debug: false
 });
 
@@ -103,4 +103,84 @@ router.route('/process/adduser').post(function(req, res) {
     var paramGroup = req.body.group;
 
     console.log('request parameter : ' + paramId + ', ' + paramPassword + ', ' + paramName + ', ' + paramEmail + ', ' + paramPhoneNum + ', ' + paramGrade + ', ' + paramGroup);
+
+    if(pool) {
+        addUser(paramId, paramPassword, paramName, paramEmail, paramPhoneNum, paramGrade, paramGroup, function(err, addedUser) {
+            if(err) {
+                console.error('error occured while addUser : ' + err.stack);
+
+                res.writeHead('200', {'Content-Type': 'text/html; charset=utf8'});
+                res.write('<h2>사용자 추가 중 에러 발생</h2>');
+                res.write('<p>' + err.stack + '</p>');
+				res.end();
+
+                return;
+            }
+
+            if(addedUser) {
+                console.dir(addedUser);
+                console.log('inserted ' + result.affectedRows + ' rows');
+
+                var insertId = result.insertId;
+                console.log('추가한 레코드의 아이디 : ' + insertId);
+
+                res.writeHead('200', {'Content-Type': 'text/html; charset=utf8'});
+                res.write('<h2>사용자 추가 성공</h2>');
+                res.end();
+            } else {
+                res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+				res.write('<h2>사용자 추가  실패</h2>');
+				res.end();
+            }
+        });
+    } else {
+        res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
+		res.write('<h2>데이터베이스 연결 실패</h2>');
+		res.end();
+    }
+});
+
+app.use('/', router);
+
+var authUser = function(id, password, callback) {
+    console.log('authUser 호출됨 : ' + id + ', ' + password);
+
+    pool.getConnection(function(err, conn) {
+        if(err) {
+            if(conn) {
+                conn.release();
+            }
+
+            callback(err, null);
+            return;
+        }
+        console.log('데이터베이스 연결 스레드 아이디 : ' + conn.threadId);
+
+        var columns = ['id', 'name', 'age'];
+        var tablename = 'ldcc12punch';
+
+        var exec = conn.query()
+    });
+}
+
+var errorHandler = expressErrorHandler({
+    static: {
+        '404': './public/404.html'
+    }
+});
+
+app.use(expressErrorHandler.httpError(404));
+app.use(errorHandler);
+
+// when process ended, database connection closed
+process.on('SIGTERM', function() {
+    console.log('process ended');
+});
+
+app.on('close', function() {
+    console.log('Express 서버 객체가 종료됩니다.');
+});
+
+http.createServer(app).listen(app.get('port'), function() {
+    console.log('server started. port: ' + app.get('port'));
 });
