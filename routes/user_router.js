@@ -1,4 +1,6 @@
-
+var user_database = require('../database/user_database');
+var authUser = user_database.authUser;
+var addUser = user_database.addUser;
 
 var login = function(req, res) {
 
