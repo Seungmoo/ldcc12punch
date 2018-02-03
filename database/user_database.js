@@ -62,7 +62,7 @@ var addUser = function(id, password, name, email, phoneNum, grade, group, callba
         }
         console.log('database connection threadId : ' + conn.threadId);
 
-        var data = {id: id, password: password, name: name, email: email, phoneNum: phoneNum, grade: grade, group: group};
+        var data = {pid: id, password: password, name: name, email: email, phoneNum: phoneNum, grade: grade, cgroup: group};
 
         var exec = conn.query('insert into users set ?', data, function(err, result) {
             conn.release();
@@ -80,6 +80,10 @@ var addUser = function(id, password, name, email, phoneNum, grade, group, callba
             callback(err, null);
         });
     })
+}
+
+var updateUser = function(id, password, name, email, phoneNum, grade, group, callback, callback) {
+    
 }
 
 module.exports.authUser = authUser;

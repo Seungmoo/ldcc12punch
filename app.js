@@ -10,21 +10,28 @@ var errorHandler = require('errorhandler');
 var expressErrorHandler = require('express-error-handler');
 var expressSession = require('express-session');
 
-var user_router = require('./routes/user_router');
+//var user_router = require('./routes/user_router');
+var engine = require('ejs-locals');
 
+var login2 = require('./routes/login2');
+var index = require('./routes/index');
+var main = require('./routes/main');
 var app = express();
+
 
 app.set('port', process.env.PORT || 80);
 //application/x-www-form-urlencoded parsing
 app.use(bodyParser.urlencoded({ extended: false }));
 //application/json parsing
 app.use(bodyParser.json());
-
 //open /public folder with static
-app.use('/views', static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'public')));
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));app.set('view engine', 'ejs');
+app.engine('ejs', engine);
 //cookie-parser setting
-app.use('cookieParser');
+app.use(cookieParser());
 
 app.use(expressSession({
     secret: 'my key',
@@ -32,16 +39,15 @@ app.use(expressSession({
     saveUninitialized: true
 }));
 
-var router = express.Router();
+//ROUTER
+app.use('/login2',login2);
+app.use('/main',main);
+app.use('/', index);
 
-router.route('/process/login').post(user_router.login);
-router.route('/process/adduser').post(user_router.adduser);
-
-app.use('/', router);
 
 var errorHandler = expressErrorHandler({
     static: {
-        '404': './public/404.html'
+        '404': './views/404.html'
     }
 });
 

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>ID/비밀번호 찾기 | 회원관리</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!--아이디 비번 찾기-->
+<style>
+@charset "utf-8";
+
+/*
+===============================================================================================
+1.	버    전 : style.css
+2.	작 성 자 : 선종혁
+===============================================================================================
+*/
+
+body {font-size:12px;color:#555555;font-family:'Malgun Gothic','맑은 고딕',dotum,'돋움',sans-serif;word-break:keep-all}
+body, div, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, p, form, fieldset, input, table, tr, th, td, button,textarea {margin:0;padding:0}
+h1, h2, h3, h4, h5, h6 {font-weight:normal}
+ul, ol, li {list-style:none}
+hr {position:absolute;left:-1000%;top:0;width:1px;height:1px;font-size:0;line-height:0;overflow:hidden}
+legend {position:absolute;left:-1000%;top:0;width:1px;height:1px;font-size:0;line-height:0;overflow:hidden}
+caption {width:0;height:0;line-height:0;visibility:hidden;font-size:0}
+fieldset {border:none}
+a {text-decoration:none;color:#757575}
+a:hover, a:active, a:visited {text-decoration:none;color:#757575}
+img {border:0;vertical-align:top}
+button {border:0;background-color:transparent;cursor:pointer;vertical-align:top}
+input,select {vertical-align:middle}
+em,address {font-style:normal}
+table {table-layout:fixed;word-wrap:break-word;border-collapse:collapse}
+
+/*layout*/
+.sub_top {padding-bottom:2px}
+.sub_top .location {line-height:25px;background-color:#545454;font-size:14px;color:#c1c1c1}
+.sub_top .location p {padding-left:32px}
+.sub_top .location p span {display:inline-block;width:13px;height:28px;margin:0 7px;background:url("../../common/img/icon_arrow.gif") no-repeat left top;text-indent:-5000px}
+.sub_top .location p strong {color:#FFFFFF}
+.sub_top .menu {padding-left:33px;border-bottom:1px solid #da6802;background-color:#f87703}
+.sub_top .menu ul {width:653px;overflow:hidden}
+.sub_top .menu ul li {float:left}
+.sub_top .menu ul li.mn01 a {display:block;padding-right:74px}
+.sub_top .menu ul li.mn02 a {display:block;padding-right:76px}
+.sub_top .menu ul li.mn03 a {display:block;padding-right:59px}
+.sub_top .menu ul li.mn04 a {display:block;padding-right:59px}
+.content {padding-top:20px}
+.content h1 {padding-left:20px;font-size:30px;font-weight:900;color:#4b4b4b}
+.fxd {position:absolute;right:0;top:0}
+
+/*로그인*/
+.content .top {margin-top:32px;padding:23px 24px 36px 301px;background:url("../../common/img/img_login.gif") no-repeat 71px top}
+.content .top p.txt01 {margin-bottom:19px;font-size:28px;color:#4b4b4b}
+.content .top p.txt02 {font-size:13px}
+.content .box01 {position:relative;width:100%;border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1;background-color:#e7e7e7}
+.content .box01 h2 {position:absolute;left:71px;top:40px;line-height:31px;font-size:50px;font-weight:900;color:#151515}
+.content .box01 h2 span {font-size:15px;color:#5c5c5c}
+.content .box01 form {padding:47px 0 48px 215px}
+.content .box01 fieldset {padding-left:20px;background:url("../../common/img/img_line.gif") no-repeat left 5px}
+.content .box01 fieldset .ipt_box {float:left}
+.content .box01 fieldset .content_btn {float:left;margin-left:7px}
+.content .box01 fieldset p.first {margin-bottom:5px}
+.content .box01 label {display:inline-block;width:56px;margin-right:5px;vertical-align:middle;font-size:14px;font-weight:900;color:#454545}
+.content .box01 input {width:197px;height:27px;border:1px solid #c8c8c8}
+.content .box01 .login_btn {float:left;margin-left:7px}
+.content .box01 button.btn01 {width:101px;padding:19px 0;border:1px solid #c05c00;background-color:red;font-weight:900;font-family:'Malgun Gothic','맑은 고딕';font-size:16px;color:#ffdcbd}
+.content .box01 button.btn02 {width:101px;padding:8px 0;border:1px solid #6c5c4c;background-color:red;font-weight:900;font-family:'Malgun Gothic','맑은 고딕';font-size:16px;color:#ffdcbd}
+
+
+.content .box02 {position:relative;width:100%;border-top:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1;background-color:#e7e7e7}
+.content .box02 h2 {position:absolute;left:71px;top:10px;line-height:31px;font-size:50px;font-weight:900;color:#151515}
+.content .box02 h2 span {font-size:15px;color:#5c5c5c}
+.content .box02 h3 {position:absolute;left:71px;top:82px;line-height:31px;font-size:50px;font-weight:900;color:#151515}
+.content .box02 h3 span {font-size:15px;color:#5c5c5c}
+.content .box02 h4 {position:absolute;left:71px;top:154px;line-height:31px;font-size:50px;font-weight:900;color:#151515}
+.content .box02 h4 span {font-size:15px;color:#5c5c5c}
+.content .box02 h5 {position:absolute;left:71px;top:242px;line-height:31px;font-size:50px;font-weight:900;color:#151515}
+.content .box02 h5 span {font-size:15px;color:#5c5c5c}
+.content .box02 form {padding:17px 0 18px 215px}
+.content .box02 fieldset {padding-left:20px;background:url("../../common/img/img_line.gif") no-repeat left 5px}
+.content .box02 fieldset .ipt_box {float:left}
+.content .box02 fieldset .content_btn {float:left;margin-left:7px}
+.content .box02 fieldset p.first {margin-bottom:5px}
+.content .box02 label {display:inline-block;width:56px;margin-right:5px;vertical-align:middle;font-size:14px;font-weight:900;color:#454545}
+.content .box02 input {width:197px;height:27px;border:1px solid #c8c8c8}
+.content .box02 .login_btn {float:left;margin-left:7px}
+.content .box02 button.btn01 {width:101px;padding:19px 0;border:1px solid #c05c00;background-color:#d56203;font-weight:900;font-family:'Malgun Gothic','맑은 고딕';font-size:16px;color:#ffdcbd}
+.content .box02 button.btn02 {width:101px;padding:8px 0;border:1px solid #6c5c4c;background-color:#746453;font-weight:900;font-family:'Malgun Gothic','맑은 고딕';font-size:16px;color:#ffdcbd}
+
+
+.mbr_pw {margin-bottom:100px; padding:35px 0 0 122px;overflow:hidden}
+.mbr_pw dl {float:left}
+.mbr_pw dl.member {width:279px}
+.mbr_pw dl.id_pw {width:199px;padding-left:71px}
+.mbr_pw dt {font-weight:900;font-size:16px;color:#333333}
+.mbr_pw dl.member a {margin-top:15px}
+.mbr_pw dl.id_pw a {margin-top:31px}
+.mbr_pw a {display:inline-block;width:145px;padding:5px 0;border:1px solid #6a5845;background-color:#8f7c68;text-align:center;color:#FFFFFF}
+
+/*회원가입*/
+.join_img {width:643px;margin:0 auto;padding:25px 0 46px}
+.join_ul {width:100%;overflow:hidden}
+.join_ul li {float:left;width:50%;text-align:center;font-size:14px}
+.join_ul li.mbr01 div {padding:38px 0 30px;border-top:1px solid #707070;border-bottom:1px solid #707070;background-color:#878787;color:#FFFFFF}
+.join_ul li.mbr02 div {padding:38px 0 30px;border-left:1px solid #534435;border-top:1px solid #534435;border-bottom:1px solid #534435;background-color:#695948;color:#FFFFFF}
+.join_ul li.mbr01 div a {display:block;width:198px;height:50px;margin:27px auto 0;line-height:50px;border:1px solid #c25c00;background-color:#d26102;font-weight:900;font-size:18px;color:#ffdcbd}
+.join_ul li.mbr02 div a {display:block;width:198px;height:50px;margin:27px auto 0;line-height:50px;border:1px solid #352b21;background-color:#42372b;font-weight:900;font-size:16px;color:#e7ccaf}
+.join_ul li strong {display:block;margin-bottom:13px;font-size:22px}
+.agree {padding:20px 22px 0}
+.agree h2.blt_h2 {padding-left:20px;background:url("../../common/img/bullet01.gif") no-repeat left 5px;font-size:15px;font-weight:900;color:#333333}
+.agree_txt {height:195px;margin:10px 0;padding:20px;border:1px solid #cdc6bf;overflow-y:scroll}
+.agree_txt p {margin-bottom:15px}
+.agree .ck {width:100%;margin-bottom:36px;overflow:hidden}
+.agree .l {float:left}
+.agree .r {float:right}
+.agree_btn {text-align:center}
+.agree_btn a {display:inline-block;width:145px;height:37px;border:1px solid #7a644c;line-height:37px;background-color:#8a7864;text-align:center;color:#FFFFFF}
+.agree_btn button {display:inline-block;width:145px;height:39px;border:1px solid #d96308;line-height:39px;background-color:#e17616;text-align:center;font-family:'Malgun Gothic','맑은 고딕';color:#FFFFFF}
+.agree_box {padding:20px;border:3px solid #dfdfdf}
+.agree_box {margin:18px 0 22px;background-color:#fbfbfb;font-size:13px}
+.agree_box dt {float:left;padding:0 8px 0 10px;background:url("../../common/img/bullet02.gif") no-repeat left 8px;color:#da6700}
+.agree_box dd {display:table}
+.agree_box p {padding:0 8px 0 10px;background:url("../../common/img/bullet02.gif") no-repeat left 8px;color:#da6700}
+.tb_style01 {width:100%;margin-bottom:30px;border-style:solid none none;border-width:2px 0 0;border-color:#4b4b4b}
+.tb_style01 tbody th {padding:12px 0 12px 34px;border-style:none solid solid none;border-width:0 1px 1px 0;border-color:#c9c9c9;background-color:#ebebeb;text-align:left}
+.tb_style01 tbody td {padding:12px 0 12px 13px;border-style:none solid solid none;border-width:0 1px 1px 0;border-color:#c9c9c9}
+.tb_style01 tbody td.last {border-right:0}
+.tb_style01 tbody td input.a_input01 {width:117px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td input.a_input02 {width:194px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td input.a_input03 {width:54px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td input.a_input04 {width:92px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td input.a_input05 {width:274px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td input.a_input06 {width:567px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td textarea {width:546px;height:47px;padding:10px;;border:1px solid #d6d8d8;font-size:12px}
+.tb_style01 tbody td select.sel01 {width:56px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td select.sel02 {width:147px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td button.zip {padding:2px 15px;border:1px solid #d2d2d2;background-color:#f7f7f7;font-weight:900;font-size:11px;color:#787878}
+.tb_style01 tbody td div.box {margin-bottom:6px}
+.tb_style01 tbody td em {color:#97836d;font-size:11px}
+.tb_style01 tbody td input.input01 {width:167px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td input.input02 {width:55px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td input.input03 {width:267px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td input.input04 {width:213px;height:21px;border:1px solid #d6d8d8}
+.tb_style01 tbody td button.btn_w {padding:2px 12px;border:1px solid #d9d9d9;background-color:#f7f7f7;font-weight:900;font-size:11px;color:#787878}
+.tb_style01 tbody td button.btn_O {padding:2px 12px;border:1px solid #d9d9d9;background-color:#f87703;font-weight:900;font-size:11px;color:#FFFFFF}
+.tb_style01 tbody td span.blk {display:block;margin-bottom:7px}
+.tb_style01 tbody td .ipin {padding:3px 14px;border:1px solid #55555;background-color:#696969;font-weight:900;font-size:11px;color:#FFFFFF}
+.tb_style01 tbody td .zip {display:inline-block;padding:2px 12px;border:1px solid #d9d9d9;background-color:#f7f7f7;font-weight:900;font-size:11px;color:#787878}
+.tb_style01 tbody td .bw {color:#97836d;font-size:11px}
+.tb_style01 tbody td .bw strong {font-size:12px}
+.tb_style01 tbody td .bw a {font-size:12px;color:#97836d}
+.tb_style02 {width:100%;margin-top:10px;border-style:solid none none;border-width:2px 0 0;border-color:#4b4b4b}
+.tb_style02 thead th {padding:10px 0;border-style:none none solid;border-width:0 0 1px;border-color:#c9c9c9;background-color:#fafafa}
+.tb_style02 thead td {padding:10px 0 10px 15px;border-style:none none solid;border-width:0 0 1px;border-color:#c9c9c9;text-align:left}
+.tb_style02 tbody th {padding:10px 0;border-style:none none solid;border-width:0 0 1px;border-color:#c9c9c9;background-color:#fafafa;text-align:center}
+.tb_style02 tbody td {padding:10px 0;border-style:none none solid;border-width:0 0 1px;border-color:#c9c9c9;text-align:center}
+.tb_style02 tbody td.left {padding-left:20px;text-align:left}
+.tb_style02 tbody td a:hover {text-decoration:underline}
+.tb_style02 tbody td.txt {height:250px;padding:15px;text-align:left;vertical-align:top}
+.mbr_txt {font-size:13px}
+.mbr_txt strong {font-size:17px}
+
+/*id_비밀번호 찾기*/
+.id_pw_srh {width:100%;overflow:hidden}
+.id_pw_srh li {float:left;width:50%}
+.id_pw_srh li .srh_box {padding:23px 41px 34px}
+.id_pw_srh li .or {border-style:solid none solid solid;border-width:1px 0 1px 1px;border-color:#d8d8d8;background:#fbfbfb url("../../common/img/img_arrow01.gif") no-repeat left top}
+.id_pw_srh li .or h2 {margin-bottom:10px;font-size:22px;font-weight:900;color:red}
+.id_pw_srh li .br h2 {margin-bottom:10px;font-size:22px;font-weight:900;color:#D06767}
+.id_pw_srh li .br {border-style:solid;border-width:1px;border-color:#d8d8d8;background:#fbfbfb url("../../common/img/img_arrow02.gif") no-repeat left top}
+.id_pw_srh li .srh_box .srh_top {text-align:center;font-size:13px}
+.id_pw_srh li .srh_box .info {margin-top:24px;padding-top:20px;border-top:1px dashed #d2d2d2}
+.id_pw_srh li .srh_box .info label {display:inline-block;width:83px;margin-right:12px;vertical-align:middle;font-weight:900;font-size:13px;color:#333333}
+.id_pw_srh li .srh_box .info p {margin-bottom:5px}
+.id_pw_srh li .srh_box .info p input {width:167px;height:21px;border:1px solid #d4d6d6}
+.id_pw_srh li .or button {display:block;width:145px;margin:26px auto 0;padding:7px 0;border:1px solid #e1660b;background-color:#e27819;font-family:'Malgun Gothic','맑은 고딕';color:#FFFFFF}
+.id_pw_srh li .br button {display:block;width:145px;margin:26px auto 0;padding:7px 0;border:1px solid #6a5845;background-color:#82705e;font-family:'Malgun Gothic','맑은 고딕';color:#FFFFFF}
+
+/* 마이페이지 */
+.my_mn {width:100%;margin-bottom:30px;overflow:hidden}
+.my_mn li {float:left;width:238px}
+.my_mn li a {display:block;padding:10px 0;border:1px solid #e1e1e1;background-color:#fcfcfc;text-align:center;color:#333333}
+.my_mn li a:hover {border:1px solid #795e43;background-color:#8e7154;color:#FFFFFF}
+.my_mn li a.on {border:1px solid #795e43;background-color:#8e7154;color:#FFFFFF}
+.board_btn {margin-top:30px;text-align:center}
+.board_btn a {display:inline-block;width:100px;padding:5px 0;border:1px solid #D96308;background-color:#E17616;color:#FFFFFF}
+</style>
+
+<script type="text/javascript">
+	function chk_idform(){
+		var name = document.getElementById("id_name");
+		var pn_1 = document.getElementById("pn_1");
+		var pn_2 = document.getElementById("pn_2");
+		var pn_3 = document.getElementById("pn_3");
+		var email = document.getElementById("id_email");
+		if(name.value == "" || name.value == null){
+			alert('이름을 입력하세요');
+			name.focus();
+			return false;
+		}
+		if(pn_1.value == "" || pn_1.value == null){
+			alert('휴대번호를 입력하세요');
+			pn_1.focus();
+			return false;
+		}
+		if(pn_2.value == "" || pn_2.value == null){
+			alert('휴대번호를 입력하세요');
+			pn_2.focus();
+			return false;
+		}
+		if(pn_3.value == "" || pn_3.value == null){
+			alert('휴대번호를 입력하세요');
+			pn_3.focus();
+			return false;
+		}
+		if(email.value == "" || email.value == null){
+			alert('이메일을 입력하세요');
+			email.focus();
+			return false;
+		}
+	}
+	function chk_pwform(){
+		var pid = document.getElementById("pid");
+		var name = document.getElementById("name");
+		var pw_email = document.getElementById("pw_email");
+		if(pid.value == "" || pid.value == null){
+			alert('아이디를 입력하세요');
+			pid.focus();
+			return false;
+		}
+		if(name.value == "" || name.value == null){
+			alert('이름을 입력하세요');
+			name.focus();
+			return false;
+		}
+		if(pw_email.value == "" || pw_email.value == null){
+			alert('이메일을 입력하세요');
+			pw_email.focus();
+			return false;
+		}
+	}
+</script>
+
+</head>
+<body>
+<div id="wrap">
+	<!--<div class="sub_top">
+		<div class="location"><p>회원관리 <span>&gt;</span> <strong>ID/비밀번호 찾기</strong></p></div>
+
+		<div class="menu">
+			<ul>
+
+				<li class="mn01"><a href="/web/login/InsideLogin.asp"><img src="/member/common/img/menu01_off.gif" alt="로그인" onmouseover="this.src='/member/common/img/menu01_on.gif'" onmouseout="this.src='/member/common/img/menu01_off.gif'" /></a></li>
+				<li class="mn02"><a href="/member/html/member_join.asp"><img src="/member/common/img/menu02_off.gif" alt="회원가입" onmouseover="this.src='/member/common/img/menu02_on.gif'" onmouseout="this.src='/member/common/img/menu02_off.gif'" /></a></li>
+				<li class="mn04"><a href="/member/html/member_idpw.asp"><img src="/member/common/img/menu04_on.gif" alt="ID/비밀번호 찾기" onmouseover="this.src='/member/common/img/menu04_on.gif'" onmouseout="this.src='/member/common/img/menu04_on.gif'" /></a></li>
+
+			</ul>
+		</div>
+	</div>-->
+	<div class="content">
+		<h1 style="text-align:center">ID/비밀번호 찾기</h1>
+		<div class="agree">
+			<ul class="id_pw_srh">
+				<li>
+					<div class="srh_box or">
+						<div class="srh_top">
+							<h2>ID찾기</h2>
+							내정보에 등록한 정보로<br /> 아이디를 찾을 수 있습니다.
+						</div>
+						<div class="info">
+							<form name="id_form" method="post" action="" onsubmit="return chk_idform()">
+							<input type="hidden" name="s_type" value="id" />
+								<fieldset>
+									<legend>id찾기 폼</legend>
+									<p><label for="id_name">이름</label> <input type="text" name="id_name" id="id_name" title="이름 입력" /></p>
+									<p><label for="id_mobile">휴대폰번호</label>
+									<select name="pn_1" id="pn_1">
+										<option value="">선택</option>
+										<option value="010">010</option>
+										<option value="011">011</option>
+										<option value="016">016</option>
+										<option value="017">017</option>
+										<option value="018">018</option>
+										<option value="019">019</option>
+									</select> - <input type="text" name="pn_2" id="pn_2" title="휴대폰번호 입력" style="width:44px;" /> - <input type="text" name="pn_3" id="pn_3" title="휴대폰번호 입력" style="width:43px;" /></p>
+									<p><label for="id_email">가입시 이메일</label> <input type="text" name="id_email" id="id_email" title="가입시 이메일 입력" /></p>
+									<button type="submit" style="background-color:red">찾기</button>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="srh_box br">
+						<div class="srh_top">
+							<h2>비밀번호 찾기</h2>
+							내정보에 등록한 정보로<br /> 비밀번호를 재설정할 수 있습니다.
+						</div>
+						<div class="info">
+							<form name="pw_form" method="post" action="search_idpw.asp" onsubmit="return chk_pwform()">
+							<input type="hidden" name="s_type" value="pw" />
+								<fieldset>
+									<legend>비밀번호 찾기 폼</legend>
+									<p><label for="pid">ID</label> <input type="text" name="pid" id="pid" title="아이디 입력" /></p>
+									<p><label for="name">이름</label> <input type="text" name="name" id="name" title="이름 입력" /></p>
+									<p><label for="pw_email">가입시 이메일</label> <input type="text" name="pw_email" id="pw_email" title="가입시 이메일 입력" /></p>
+									<button type="submit" style="background-color:#D06767">찾기</button>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+<!--nProtect 키보드보안 적용 시작-->
+<!--<script type="Text/Javascript" src="http://update.nprotect.net/keycrypt/ansi/npkcx.js"></script>
+<!--nProtect 키보드보안 적용 끝-->
+</body>
+</html>
